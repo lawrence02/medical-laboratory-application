@@ -1,0 +1,56 @@
+// an ignored comment
+/** not an ignored comment */
+
+/**
+ * Practitioner entity.
+ * @author The JHipster team.
+ */
+entity Practitioner {
+    //practitionerType PractitionerType,
+    registrationNumber String required, // Corrected spelling
+    surname String required,
+    forenames String required,
+    previousSurname String,
+    dob LocalDate required,
+    //gender Gender required,
+    placeOfBirthTown String,
+    placeOfBirthCountry String,
+    nationality String,
+    nationalId String,
+    //maritalStatus MaritalStatus,
+    residentialAddress1 String,
+    residentialAddress2 String,
+    residentialAddress3 String,
+    homePhone String,
+    workPhone String,
+    cellPhone String,
+    emailAddress String,
+    nameOfPlaceOfEmployment String,
+    employerAddress String,
+    employerEmail String,
+    dateOfEmployment String,
+    //areaOfEmployment AreaOfEmployment,
+    //employmentStatus EmploymentStatus,
+    //typeOfInstitution TypeOfInstitution,
+    //provinceEmployed Province,
+    reasonForNonEmployment String, // Corrected spelling
+    dateOfApplication String,
+    //signature File,
+    applicationFee String,
+    status String,
+    reasonNotApproved String
+}
+
+entity Settings {
+    name String,
+    status String
+}
+
+
+paginate * with pagination
+
+// Set service options to all except few
+service all with serviceImpl except Settings
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

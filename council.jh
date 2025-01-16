@@ -1,0 +1,120 @@
+// an ignored comment
+/** not an ignored comment */
+
+/**
+ * Practitioner entity.
+ * @author The JHipster team.
+ */
+entity Practitioner {
+    practitionerType PractitionerType,
+    registrationNumber String required, // Corrected spelling
+    surname String required,
+    forenames String required,
+    previousSurname String,
+    dob LocalDate required,
+    gender Gender required,
+    placeOfBirthTown String,
+    placeOfBirthCountry String,
+    nationality String,
+    nationalId String,
+    maritalStatus MaritalStatus,
+    residentialAddress1 String,
+    residentialAddress2 String,
+    residentialAddress3 String,
+    homePhone String,
+    workPhone String,
+    cellPhone String,
+    emailAddress String,
+    nameOfPlaceOfEmployment String,
+    employerAddress String,
+    employerEmail String,
+    dateOfEmployment String,
+    areaOfEmployment AreaOfEmployment,
+    employmentStatus EmploymentStatus,
+    typeOfInstitution TypeOfInstitution,
+    provinceEmployed Province,
+    reasonForNonEmployment String, // Corrected spelling
+    dateOfApplication String,
+    signature File,
+    applicationFee String,
+    status String,
+    reasonNotApproved String
+}
+
+entity Settings {
+    name String,
+    status String
+}
+
+entity Qualification {
+    qualificationName String,
+    nameOfInstitute String,
+    dateFrom LocalDate,
+    dateTo LocalDate,
+    awardedBy String, // Changed to String
+    awardedDate LocalDate,
+    practitioner Practitioner required // Added reference to Practitioner
+}
+
+entity Subscription {
+    registrationNumber String, // Corrected spelling
+    datePaid LocalDate,
+    subscriptionPeriod String,
+    amount String,
+    practitioner Practitioner required // Added reference to Practitioner
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+    Practitioner to Qualification{practitioner}
+    Practitioner to Subscription{practitioner}
+}
+
+enum MaritalStatus {
+    MARRIED, SINGLE, OTHER
+}
+enum Gender {
+    MALE, FEMALE, UNKNOWN
+}
+enum Title {
+    MR, MRS, MISS, MS, DR
+}
+enum PractitionerType {
+    CLINICALSCIENTIST, MEDICALRESEARCHSCIENTIST,
+    MEDICALLABORATORYSCIENTIST, MEDICALLABORATORYTECHNICIAN,
+    STATECERTIFIEDTECHNICIAN, STATECERTIFIEDBLOODBANKTECHNICIAN,
+    CYTOTECHNICIAN, MEDICALLABORATORYTECHNICIAN, POCTESTER
+}
+
+enum TrainingLocation {
+    INCOUNTRY, OUTSIDE, UNKNOWN
+}
+
+enum AreaOfEmployment {
+    GOVERNMENT, MISSION, PRIVATE,
+    LOCALAUTHORITY, OTHER
+}
+
+enum EmploymentStatus {
+    FULLTIME, PARTTIME, TEMPORARY
+}
+
+enum TypeOfInstitution {
+    HOSPITAL, CLINIC, EDUCATIONINSTITUTE,
+    PHARMACY, LABORATORY, NURSINGHOME,
+    MINES, MOBILEPOST, AGENCY, OTHER
+}
+
+enum Province {
+    BULAWAYO, HARARE, MASHONALANDCENTRAL, MASHONALANDEAST,
+    MASHONALANDWEST, MASVINGO,
+    MATEBELELANDNORTH, MATEBELELANDSOUTH, MANICALAND, MIDLANDS
+}
+
+paginate * with pagination
+
+// Set service options to all except few
+service all with serviceImpl except Settings
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

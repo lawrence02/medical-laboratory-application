@@ -1,0 +1,2 @@
+org.springframework.test.context.ContextCustomizerFactory = \
+    com.council.medical.config.SqlTestContainersSpringContextCustomizerFactory
